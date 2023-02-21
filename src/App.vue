@@ -61,6 +61,11 @@ export default {
 
   computed: {
     ...cc(`bShowEditor bShowSaveToast`),
+    oDatabase: {
+      get() {
+          return this.$store.state.oDatabase
+      },
+    },
     oSelectedItem: {
       get() {
           return this.$store.state.oDatabase['table'][`selection_item`]
@@ -106,6 +111,7 @@ export default {
         command: "load",
         data: this.oSelectedItem.svg
       }
+      console.log("oData", oData)
 
       window.frames.drawioframe.postMessage(JSON.stringify(oData));
     },
@@ -144,6 +150,17 @@ export default {
       this.fnImport()
     },
   },
+
+  // watch: {
+  //   oDatabase(oN, oO) {
+  //     if (this.oSelectedItem) {
+  //       console.log(">>>", this.oSelectedItem)
+  //       setTimeout(() => {
+  //         this.fnIframeLoadSVG()
+  //       }, 300)
+  //     }
+  //   }
+  // },
 
   created() {
     var oThis = this

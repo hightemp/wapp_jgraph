@@ -89,12 +89,13 @@ export default {
     data() {
         return {
             sFilter: "",
-            oSelectedItem: null,
+            // oSelectedItem: null,
 
             aDropdownMenu: [
                 { id:"add", title:'<i class="bi bi-plus-lg"></i> Добавить' },
                 { id:"edit", title:'<i class="bi bi-pencil"></i> Редактировать' },
                 { id:"delete", title:'<i class="bi bi-trash"></i> Удалить' },
+                { id:"export", title:'<i class="bi bi-box-arrow-down"></i> Экспортировать' },
             ],
         }
     },
@@ -123,6 +124,23 @@ export default {
             if (oItem.id == "delete") {
                 this.fnRemoveFromTable({ sTableName: this.table_name, oItem: this.oSelectedItem })
             }
+            if (oItem.id == "export") {
+                if (!this.oSelectedItem) {
+                    alert("Нужно выбрать");
+                }
+                var sFileName = ''
+                if (sFileName = prompt('Имя файла', this.oSelectedItem.name)) {
+                    this.fnSaveFile(`${sFileName}.drawio`, this.oSelectedItem.svg);
+                }
+            }
+        },
+        fnSaveFile(sFileName, sData) {
+            var dataStr = "data:text/xml;charset=utf-8," + encodeURIComponent(sData);
+            var oE = document.createElement("A");
+            oE.setAttribute("href", dataStr);
+            oE.setAttribute("download", `${sFileName}`);
+            oE.click();
+            oE.remove()
         }
     }
 }

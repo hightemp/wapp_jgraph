@@ -53,28 +53,6 @@ export default createStore({
             oForms: {
                 table: {
                     name: "",
-
-                },
-                form2: {
-                    text_field1: "",
-                    text_field2: "",
-                    text_field3: "",
-                },
-                table2: {
-                    field1: "",
-                    field2: "",
-                    text_field3: "",
-                },
-                list1: {
-                    name: ""
-                },
-                list2: {
-                    name: "",
-                    list1_relation_id: null,
-                },
-                list3: {
-                    name: "",
-                    list2_relation_id: null,
                 },
             },
         }
@@ -202,6 +180,8 @@ export default createStore({
                 .then((mData) => {
                     if (!mData) throw "Cannot destructure property"
                     commit('fnUpdateDatabase', mData)
+                    commit('fnUpdateDatabaseVar', { sTableName: 'table', sVarName: `selection_item`, mV: null })
+                    commit('fnUpdateDatabaseVar', { sTableName: 'table', sVarName: `selection_id`, mV: null })
                     // commit('fnUpdateDatabase', mData=demo_database)
                     commit('fnHideLoader')
                 })
@@ -214,6 +194,8 @@ export default createStore({
                                     .fnReadFileJSON(DATABASE_PATH)
                                     .then((mData) => { 
                                         commit('fnUpdateDatabase', mData)
+                                        commit('fnUpdateDatabaseVar', { sTableName: 'table', sVarName: `selection_item`, mV: null })
+                                        commit('fnUpdateDatabaseVar', { sTableName: 'table', sVarName: `selection_id`, mV: null })
                                         commit('fnHideLoader')
                                     })
                             })
