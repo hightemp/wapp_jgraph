@@ -33,6 +33,7 @@
       ></iframe>
     </div>
   </div>
+  <saved_toast />
   <repo_window />
   <loader/>
 </template>
