@@ -143,22 +143,22 @@ export default createStore({
         fnRemoveFromTable(state, { sTableName, oItem }) {
             state.oDatabase[sTableName][`data`] = state.oDatabase[sTableName][`data`].filter((oI) => oI.id != oItem.id)
         },
-
+    },
+    actions: {
         fnExportDatabase({ commit, state, dispatch, getters }) {
-            fnSaveFile('tasks-database', JSON.stringify(state.oDatabase, null, 4))
+            fnSaveFile('jgraph-database', JSON.stringify(state.oDatabase, null, 4))
         },
         fnImportDatabase({ commit, state, dispatch, getters }, sData) {
             commit('fnUpdateDatabase', JSON.parse(sData))
         },
 
         fnExportRepos({ commit, state, dispatch, getters }) {
-            fnSaveFile('tasks-repos', JSON.stringify(state.aReposList, null, 4))
+            fnSaveFile('jgraph-repos', JSON.stringify(state.aReposList, null, 4))
         },
         fnImportRepos({ commit, state, dispatch, getters }, sData) {
             commit('fnUpdateRepos', JSON.parse(sData))
         },
-    },
-    actions: {
+
         fnPrepareRepo({ commit, state, dispatch, getters }) {
             commit('fnHideRepoWindow')
             FileSystemDriver.fnInit(getters.oCurrentRepo)
