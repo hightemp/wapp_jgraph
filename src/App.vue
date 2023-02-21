@@ -60,7 +60,7 @@ export default {
   },
 
   computed: {
-    ...cc(`bShowEditor`),
+    ...cc(`bShowEditor bShowSaveToast`),
     oSelectedItem: {
       get() {
           return this.$store.state.oDatabase['table'][`selection_item`]
