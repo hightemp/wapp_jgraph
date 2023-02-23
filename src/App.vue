@@ -60,7 +60,7 @@ export default {
   },
 
   computed: {
-    ...cc(`bShowEditor bShowSaveToast`),
+    ...cc(`bShowRepoWindow bShowEditor bShowSaveToast`),
     oDatabase: {
       get() {
           return this.$store.state.oDatabase
